@@ -1,0 +1,33 @@
+# YAML 
+
+# GitHub Actions Workflow YAML
+
+name: Python application test with Github actions
+on: [push]
+
+jobs:
+  build:
+    runs-on: Ubuntu-latest
+    steps:    
+    - uses: actions/checkout@v3    
+    - name: Set up Python  
+      uses: actions/setup-python@v3 
+      with:
+        python-version: "3.9"
+        
+    - name: Install dependecies
+      run: |
+        make install
+   
+    - name: Lint with Pylint
+      run: |
+        make lint
+
+    - name: Test with Pytest
+      run: |
+        make test
+
+    - name: Format Code with Python black
+      run: |
+        make format
+      
